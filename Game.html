@@ -9,12 +9,12 @@
         <p id="dealerScore-el">Dealer Score:</p>
         <p id="playerCards-el">Your Cards</p>
         <p id="playerScore-el">Your Score</p>
-        <button id="score-btn" onclick="startGame()">Score</button>
-        <button id="newCard-btn" onclick="newCard()">Deal Card</button>
+        <button id="score-btn" onclick="playerEndsGame()">Stand</button>
+        <button id="newCard-btn" onclick="newCard()">Hit</button>
         <p></p>
         <button id="newGame-btn" onclick="startGame()">New Game</button>
         <p></p>
-        <button>Quit Game</button>
+        <button onclick="quitGame()">Quit Game</button>
         <script src="Game.js"></script>
     </body>
 </html>

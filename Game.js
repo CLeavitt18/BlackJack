@@ -29,6 +29,7 @@ function startGame()
     playerHand.push(randomCard())
     playerHand.push(randomCard())
 
+    messageText.textContent = "Game in Progress"
     renderGame();
 }
 
@@ -38,7 +39,7 @@ function renderGame()
 
     for (let i = 0; i < dealerHand.length; i++) 
     {
-        if (i >= dealerHand.length - 1) 
+        if (i >= dealerHand.length - 1 && gameOver === false) 
         {
             dealerText.textContent += " ?"    
         }
@@ -62,7 +63,7 @@ function renderGame()
 
 function newCard()
 {
-    if (gameOver) 
+    if (gameOver === true) 
     {
         return;    
     }
@@ -157,6 +158,15 @@ function Score()
     }
 
     dealerScore = total
+
+    if (gameOver === true) 
+    {
+        dealerScoreText.textContent = "Dealer Score: " + dealerScore    
+    }
+    else
+    {
+        dealerScoreText.textContent = "Dealer Score: ??"
+    }
 }
 
 function getValue(num)
@@ -180,26 +190,69 @@ function randomCard()
 
 function playerEndsGame()
 {
-    
-}
-
-function checkGameState()
-{
-    if (gameOver) 
+    if (gameOver === true) 
     {
-        return    
+        return   
     }
-
-    if (dealerScore === 21) 
+    
+    if (playerScore >= 21 || dealerScore >= 21) 
+    {
+        checkGameState()    
+    }
+    else if (playerScore > dealerScore) 
+    {
+        gameOver = true
+        renderGame()
+        messageText.textContent = "You Won, the dealer lost!"
+    }
+    else if (playerScore < dealerScore) 
     {
         gameOver = true
         renderGame()
         messageText.textContent = "Dealer Won, you lost"
     }
-    else if (playerScore === 21) 
+}
+
+function checkGameState()
+{
+    if (gameOver === true) 
     {
-        renderGame()
-        gameOver = true
-        messageText.textContent = "You Won, the dealer lost!!"
+        return    
     }
+
+    if (playerScore > 21 && dealerScore > 21) 
+    {
+        gameOver = true
+        renderGame()
+        messageText.textContent = "Draw"
+    }
+    else if (dealerScore === 21)
+    {
+        gameOver = true
+        renderGame()
+        messageText.textContent = "Dealer has Blackjack, you lost"
+    }
+    else if(playerScore > 21) 
+    {
+        gameOver = true
+        renderGame()
+        messageText.textContent = "You Busted, the Dealer won"
+    }
+    else if (playerScore === 21)
+    {
+        gameOver = true
+        renderGame()
+        messageText.textContent = "You have Blackjack, you Won!!"
+    }
+    else if(dealerScore > 21) 
+    {
+        gameOver = true
+        renderGame()
+        messageText.textContent = "You Win, the dealer Busted!!"
+    }
+}
+
+function quitGame()
+{
+    window.location.href = "BlackJack.html"
 }
