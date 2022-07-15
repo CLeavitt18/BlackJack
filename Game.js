@@ -121,6 +121,10 @@ function Score()
             {
                 total += 11   
             }
+            else
+            {
+                total != 1
+            }
         }
     }
 
