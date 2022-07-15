@@ -1,53 +1,115 @@
 let playerHand = []
 let dealerHand = []
-let dealerText = document.getElementById("dealerCards")
+let dealerText = document.getElementById("dealerCards-el")
+let playerText = document.getElementById("playerCards-el")
 
 startGame()
 
 function startGame()
 {
-    /*if (playerHand.length > 0) 
-    {
-        let handSize = playerHand.length
-
-        for (let i = 0; i < handSize; i++) 
-        {
-            playerHand.pop()
-        }
-
-        handSize = dealerHand.length
-
-        for(let i = 0; i > handSize; i++)
-        {
-            dealerHand.pop()
-        }
-    }*/
+    dealerHand = []
+    playerHand = []
 
     dealerHand.push(randomCard())
-    console.log(dealerHand[0])
+    dealerHand.push(randomCard())
 
-    switch(dealerHand[dealerHand.length - 1])
-    {
-        case 1:
-            dealerText.textContent += " A"
-            break
-        case 11:
-            dealerText.textContent += " J"
-            break
-        case 12:
-            dealerText.textContent += " Q"
-            break
-        case 13:
-            dealerText.textContent += " K"
-            break
-        default:
-            dealerText.textContent += " " + dealerHand[dealerHand. length - 1] 
-    }
+    playerHand.push(randomCard())
+    playerHand.push(randomCard())
+
+    renderGame();
 }
 
 function renderGame()
 {
+    dealerText.textContent = "Dealer Cards: "
 
+    for (let i = 0; i < dealerHand.length; i++) 
+    {
+        if (i >= dealerHand.length - 1) 
+        {
+            dealerText.textContent += " ?"    
+        }
+        else
+        {
+            dealerText.textContent += " " + getSuit(dealerHand[i])
+        }
+
+    }
+
+    playerText.textContent = "Your Cards: "
+
+    for (let i = 0; i < playerHand.length; i++) 
+    {
+        playerText.textContent += " " + getSuit(playerHand[i])
+    }
+
+
+}
+
+function getSuit(num)
+{
+    switch(num)
+    {
+        case 1:
+            return "A"
+        case 11:
+            return "J"
+        case 12:
+            return "Q"
+        case 13:
+            return "K"
+        default:
+            return num
+    }
+}
+
+function Score(hand = [])
+{
+    let total = 0
+    let totalAs = 0
+
+    for (let i = 0; i < hand.length; i++) 
+    {
+        if (hand[i] === 1) 
+        {
+            totalAs++  
+        }
+        else
+        {
+            total += getValue()
+        }
+
+    }
+
+    if (totalAs > 0) 
+    {
+        if (totals > 1) 
+        {
+            total += totalAs * 1    
+        }
+        else
+        {
+            if (total + 11 <= 21) 
+            {
+                total += 11   
+            }
+        }
+    }
+
+    return total
+}
+
+function getValue(num)
+{
+    switch(num)
+    {
+        case 11:
+        case 12:
+        case 13:
+            return 10
+        default:
+            return num
+    }
 }
 
 function randomCard()

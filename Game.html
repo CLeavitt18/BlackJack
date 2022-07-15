@@ -4,10 +4,13 @@
     </head>
     <body>
         <h1>BlackJack</h1>
-        <p id="message-txt">Game in Progress</p>
-        <p id = "dealerCards">Dealer Cards</p>
-        <p id="playerCards">Your Cards</p>
+        <p id="message-el">Game in Progress</p>
+        <p id = "dealerCards-el">Dealer Cards</p>
+        <p id="dealerScore-el">Dealer Score: </p>
+        <p id="playerCards-el">Your Cards</p>
+        <p id="playerScore-el">Player Score: </p>
         <button id="newGame-btn" onclick="startGame()">New Game</button>
+        <button id="newCard-btn" onclick="newCard()">Deal Card</button>
         <button>Quit Game</button>
         <script src="Game.js"></script>
     </body>
