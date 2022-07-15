@@ -220,7 +220,7 @@ function checkGameState()
         return    
     }
 
-    if (playerScore > 21 && dealerScore > 21) 
+    if ((playerScore > 21 && dealerScore > 21) || playerScore === dealerScore)  
     {
         gameOver = true
         renderGame()
