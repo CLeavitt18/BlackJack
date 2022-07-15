@@ -1,7 +1,11 @@
 let playerHand = []
 let dealerHand = []
+
 let dealerText = document.getElementById("dealerCards-el")
+let dealerScore = document.getElementById("dealerScore-el")
+
 let playerText = document.getElementById("playerCards-el")
+let playerScore = document.getElementById("playerScore-el")
 
 startGame()
 
@@ -43,7 +47,16 @@ function renderGame()
         playerText.textContent += " " + getSuit(playerHand[i])
     }
 
+    Score()
+}
 
+function newCard()
+{
+    dealerHand.push(randomCard())
+
+    playerHand.push(randomCard())
+
+    renderGame()
 }
 
 function getSuit(num)
@@ -63,27 +76,26 @@ function getSuit(num)
     }
 }
 
-function Score(hand = [])
+function Score()
 {
     let total = 0
     let totalAs = 0
 
-    for (let i = 0; i < hand.length; i++) 
+    for (let i = 0; i < playerHand.length; i++) 
     {
-        if (hand[i] === 1) 
+        if (playerHand[i] === 1) 
         {
             totalAs++  
         }
         else
         {
-            total += getValue()
+            total += getValue(playerHand[i])
         }
-
     }
 
     if (totalAs > 0) 
     {
-        if (totals > 1) 
+        if (totalAs > 1) 
         {
             total += totalAs * 1    
         }
@@ -96,7 +108,8 @@ function Score(hand = [])
         }
     }
 
-    return total
+    playerScore.textContent = "Your Score: " + total
+    console.log("Your Score: " + total)
 }
 
 function getValue(num)
